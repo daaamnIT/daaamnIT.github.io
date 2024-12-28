@@ -7,7 +7,6 @@ class ThemeSwitcher {
     }
   
     initializeThemeToggle() {
-      // Create theme toggle button
       const toggleBtn = document.createElement('button');
       toggleBtn.className = 'theme-toggle position-fixed text-white';
       toggleBtn.style.top = '20px';
@@ -22,10 +21,8 @@ class ThemeSwitcher {
     }
   
     setupEventListeners() {
-      // Theme toggle click handler
       document.querySelector('.theme-toggle').addEventListener('click', () => this.toggleTheme());
   
-      // Listen for system theme changes
       if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
           if (this.shouldFollowSystemTheme()) {
@@ -34,7 +31,6 @@ class ThemeSwitcher {
         });
       }
   
-      // Initial theme setup
       this.initializeTheme();
     }
   
@@ -85,7 +81,6 @@ class ThemeSwitcher {
     }
   }
   
-  // Initialize theme switcher
   document.addEventListener('DOMContentLoaded', () => {
     new ThemeSwitcher();
   });

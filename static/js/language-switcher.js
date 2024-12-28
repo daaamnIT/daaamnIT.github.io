@@ -54,44 +54,35 @@ class LanguageSwitcher {
     const newLang = currentLang === 'ru' ? 'en' : 'ru';
     this.setLanguage(newLang);
     
-    // Immediately update button text
     const toggleBtn = document.querySelector('.lang-toggle');
     toggleBtn.innerHTML = newLang === 'ru' ? 'EN' : 'RU';
   }
 
   setLanguage(lang) {
-    // First update storage
     localStorage.setItem(this.STORAGE_KEY, lang);
     
-    // Then update UI elements
     this.updateContent(lang);
     this.updateToggleButton(lang);
     
-    // Update HTML lang attribute
     document.documentElement.lang = lang;
   }
 
   updateToggleButton(lang) {
     const toggleBtn = document.querySelector('.lang-toggle');
-    // When in Russian, show 'EN' as the option to switch to
-    // When in English, show 'RU' as the option to switch to
     toggleBtn.innerHTML = lang === 'ru' ? 'EN' : 'RU';
   }
 
   updateContent(lang) {
     const content = this.translations[lang];
     
-    // Update logo name and subtitle
     const logoTitle = document.querySelector('.logo-title');
     const logoSubtitle = document.querySelector('.logo-subtitle');
     if (logoTitle) logoTitle.textContent = content.logo.name;
     if (logoSubtitle) logoSubtitle.textContent = content.logo.subtitle;
     
-    // Update navigation
     document.querySelector('[href="#story"]').textContent = content.nav.about;
     document.querySelector('[href="#projects"]').textContent = content.nav.experience;
     
-    // Update all contact/write me buttons
     document.querySelectorAll('[href="#contact"]').forEach(el => {
       if (el.classList.contains('btn')) {
         el.textContent = content.nav.writeMe;
@@ -100,25 +91,20 @@ class LanguageSwitcher {
       }
     });
 
-    // Update greeting section button
     const greetingButton = document.querySelector('.promo .btn');
     if (greetingButton) {
       greetingButton.textContent = content.nav.writeMe;
     }
 
-    // Update greeting
     document.querySelector('.greeting-text').textContent = content.greeting.hello;
     document.querySelector('.promo-text').innerHTML = content.greeting.description.replace('\n', '<br>');
 
-    // Update about section
     document.querySelector('#story h2').textContent = content.about.title;
     document.querySelector('#story p').textContent = content.about.content;
 
-    // Update experience section
     document.querySelector('#projects h2').textContent = content.experience.title;
     document.querySelector('.work-experience h3').textContent = content.experience.hse.name;
     
-    // Update positions
     const positions = document.querySelectorAll('.position');
     const positionData = [
       content.experience.hse.positions.student,
@@ -139,7 +125,6 @@ class LanguageSwitcher {
       }
     });
 
-    // Update goals section
     const goalsSection = document.querySelector('.goals');
     if (goalsSection) {
       const titleEl = goalsSection.querySelector('h2');
@@ -151,7 +136,6 @@ class LanguageSwitcher {
       }
     }
 
-    // Update contact section
     const contactSection = document.querySelector('#contact');
     if (contactSection) {
       const titleEl = contactSection.querySelector('h2');
@@ -165,7 +149,6 @@ class LanguageSwitcher {
       if (emailButton) emailButton.textContent = content.contact.email;
     }
 
-    // Update footer
     const footerText = document.querySelector('.footer .nav-item');
     if (footerText) {
       footerText.textContent = content.footer.copyright;
@@ -173,7 +156,6 @@ class LanguageSwitcher {
   }
 }
 
-// Initialize language switcher
 document.addEventListener('DOMContentLoaded', () => {
   new LanguageSwitcher();
 });
