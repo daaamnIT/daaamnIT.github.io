@@ -1,161 +1,166 @@
 import translations from './translations.js';
 
-class LanguageSwitcher {
-  constructor() {
-    this.STORAGE_KEY = 'preferred-language';
-    this.DEFAULT_LANG = 'ru';
-    this.translations = translations;
-    this.initializeLanguageToggle();
-    this.setupEventListeners();
-    this.initializeLanguage();
+document.addEventListener('DOMContentLoaded', function() {
+  // Константы
+  const STORAGE_KEY = 'preferred-language';
+  const DEFAULT_LANG = 'ru';
+  
+  // Находим кнопку переключения языка
+  const languageToggle = document.querySelector('.lang-toggle');
+  
+  // Получаем текущий язык из localStorage или используем дефолтный
+  function getCurrentLanguage() {
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
-
-  initializeLanguageToggle() {
-    // Create language toggle button
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'lang-toggle position-fixed';
-    toggleBtn.style.cssText = `
-      top: 20px;
-      right: 80px;
-      z-index: 1000;
-      background: transparent;
-      color: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: 0.3s ease;
-      font-weight: bold;
-      font-size: 14px;
-    `;
-    toggleBtn.innerHTML = this.getCurrentLanguage() === 'ru' ? 'EN' : 'RU';
-    document.body.appendChild(toggleBtn);
-  }
-
-  setupEventListeners() {
-    document.querySelector('.lang-toggle').addEventListener('click', () => this.toggleLanguage());
-  }
-
-  initializeLanguage() {
-    const savedLang = localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANG;
-    this.setLanguage(savedLang);
-  }
-
-  getCurrentLanguage() {
-    return localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANG;
-  }
-
-  toggleLanguage() {
-    const currentLang = this.getCurrentLanguage();
-    const newLang = currentLang === 'ru' ? 'en' : 'ru';
-    this.setLanguage(newLang);
+  
+  // Устанавливаем начальное состояние кнопки
+  if (languageToggle) {
+    const currentLang = getCurrentLanguage();
+    languageToggle.textContent = currentLang === 'ru' ? 'EN' : 'RU';
     
-    const toggleBtn = document.querySelector('.lang-toggle');
-    toggleBtn.innerHTML = newLang === 'ru' ? 'EN' : 'RU';
+    // Применяем текущий язык при загрузке страницы
+    applyLanguage(currentLang);
+    
+    // Добавляем обработчик события для кнопки
+    languageToggle.addEventListener('click', function() {
+      const currentLang = getCurrentLanguage();
+      const newLang = currentLang === 'ru' ? 'en' : 'ru';
+      
+      // Сохраняем выбранный язык
+      localStorage.setItem(STORAGE_KEY, newLang);
+      
+      // Обновляем текст кнопки
+      languageToggle.textContent = newLang === 'ru' ? 'EN' : 'RU';
+      
+      // Применяем новый язык
+      applyLanguage(newLang);
+    });
+  } else {
+    console.error('Кнопка переключения языка не найдена');
   }
-
-  setLanguage(lang) {
-    localStorage.setItem(this.STORAGE_KEY, lang);
+  
+  // Функция для применения языка к странице
+  function applyLanguage(lang) {
+    console.log('Применяем язык:', lang);
+    const content = translations[lang];
     
-    this.updateContent(lang);
-    this.updateToggleButton(lang);
+    if (!content) {
+      console.error('Переводы для языка', lang, 'не найдены');
+      return;
+    }
     
+    // Установка языка документа
     document.documentElement.lang = lang;
-  }
-
-  updateToggleButton(lang) {
-    const toggleBtn = document.querySelector('.lang-toggle');
-    toggleBtn.innerHTML = lang === 'ru' ? 'EN' : 'RU';
-  }
-
-  updateContent(lang) {
-    const content = this.translations[lang];
     
-    const logoTitle = document.querySelector('.logo-title');
-    const logoSubtitle = document.querySelector('.logo-subtitle');
-    if (logoTitle) logoTitle.textContent = content.logo.name;
-    if (logoSubtitle) logoSubtitle.textContent = content.logo.subtitle;
+    // Логотип и подзаголовок
+    updateTextContent('.logo-title', content.logo.name);
+    updateTextContent('.logo-subtitle', content.logo.subtitle);
     
-    document.querySelector('[href="#story"]').textContent = content.nav.about;
-    document.querySelector('[href="#projects"]').textContent = content.nav.experience;
+    // Навигационное меню
+    updateTextContent('[href="#story"]', content.nav.about);
+    updateTextContent('[href="#education"]', content.nav.experience);
+    updateTextContent('[href="#projects"]', content.nav.projects);
+    updateTextContent('[href="#skills"]', content.nav.skills);
     
+    // Обновляем все ссылки "Написать мне"/"Contact"
     document.querySelectorAll('[href="#contact"]').forEach(el => {
       if (el.classList.contains('btn')) {
-        el.textContent = content.nav.writeMe;
+        el.textContent = content.greeting.button;
       } else {
-        el.textContent = content.nav.collaboration;
+        el.textContent = content.nav.writeMe;
       }
     });
-
-    const greetingButton = document.querySelector('.promo .btn');
-    if (greetingButton) {
-      greetingButton.textContent = content.nav.writeMe;
-    }
-
-    document.querySelector('.greeting-text').textContent = content.greeting.hello;
-    document.querySelector('.promo-text').innerHTML = content.greeting.description.replace('\n', '<br>');
-
-    document.querySelector('#story h2').textContent = content.about.title;
-    document.querySelector('#story p').textContent = content.about.content;
-
-    document.querySelector('#projects h2').textContent = content.experience.title;
-    document.querySelector('.work-experience h3').textContent = content.experience.hse.name;
     
-    const positions = document.querySelectorAll('.position');
-    const positionData = [
-      content.experience.hse.positions.student,
-      content.experience.hse.positions.pupil1,
-      content.experience.hse.positions.pupil2
-    ];
+    // Приветствие
+    updateTextContent('.greeting-text', content.greeting.hello);
     
-    positions.forEach((position, index) => {
-      const data = positionData[index];
-      if (data && position) {
-        const titleEl = position.querySelector('h4');
-        const periodEl = position.querySelector('p.text-white');
-        const descEl = position.querySelector('p:last-child');
-        
-        if (titleEl) titleEl.textContent = data.title;
-        if (periodEl) periodEl.textContent = data.period;
-        if (descEl) descEl.textContent = data.description;
-      }
-    });
-
-    const goalsSection = document.querySelector('.goals');
-    if (goalsSection) {
-      const titleEl = goalsSection.querySelector('h2');
-      const contentEl = goalsSection.querySelector('p');
+    // Описание в приветствии (с поддержкой переноса строки)
+    const promoText = document.querySelector('.promo-text');
+    if (promoText) {
+      promoText.innerHTML = content.greeting.description.replace('\n', '<br>');
+    }
+    
+    // Кнопка в приветствии
+    updateTextContent('.promo .btn', content.greeting.button);
+    
+    // Раздел "Обо мне"
+    updateTextContent('#story h2', content.about.title);
+    updateTextContent('#story p', content.about.content);
+    
+    // Раздел "Образование"
+    updateTextContent('#education h2', content.experience.title);
+    updateTextContent('.education h3', content.experience.hse.name);
+    
+    // Позиции в разделе "Образование"
+    const educationPositions = document.querySelectorAll('.education .position');
+    if (educationPositions.length >= 1) {
+      const studentPosition = educationPositions[0];
+      updateTextContent(studentPosition.querySelector('h4'), content.experience.hse.positions.student.title);
+      updateTextContent(studentPosition.querySelector('p[style*="opacity"]'), content.experience.hse.positions.student.period);
+      updateTextContent(studentPosition.querySelector('p:last-child'), content.experience.hse.positions.student.description);
+    }
+    
+    if (educationPositions.length >= 2) {
+      const pupilPosition = educationPositions[1];
+      updateTextContent(pupilPosition.querySelector('h4'), content.experience.hse.positions.pupil1.title);
+      updateTextContent(pupilPosition.querySelector('p[style*="opacity"]'), content.experience.hse.positions.pupil1.period);
+      updateTextContent(pupilPosition.querySelector('p:last-child'), content.experience.hse.positions.pupil1.description);
+    }
+    
+    // Раздел "Проекты"
+    updateTextContent('#projects h2', content.projects.title);
+    
+    // Карточки проектов
+    const projectCards = document.querySelectorAll('#projects .card');
+    for (let i = 0; i < projectCards.length && i < content.projects.items.length; i++) {
+      const card = projectCards[i];
+      const project = content.projects.items[i];
       
-      if (titleEl) titleEl.textContent = content.goals.title;
-      if (contentEl) {
-        contentEl.innerHTML = content.goals.content + '<br><br>' + content.goals.poem.replace(/\n/g, '<br>');
+      updateTextContent(card.querySelector('h3'), project.name);
+      updateTextContent(card.querySelector('p.text-muted'), `${project.period} | ${project.location}`);
+      updateTextContent(card.querySelector('h5'), project.subtitle);
+      updateTextContent(card.querySelector('p:last-child'), project.description);
+    }
+    
+    // Раздел "Навыки"
+    updateTextContent('#skills h2', content.skills.title);
+    
+    // Находим все подразделы навыков
+    const skillSections = document.querySelectorAll('#skills .mb-4');
+    if (skillSections.length >= 1) {
+      updateTextContent(skillSections[0].querySelector('p'), content.skills.content.programmingLanguages);
+    }
+    if (skillSections.length >= 2) {
+      updateTextContent(skillSections[1].querySelector('p'), content.skills.content.libraries);
+    }
+    if (skillSections.length >= 3) {
+      updateTextContent(skillSections[2].querySelector('p'), content.skills.content.tools);
+    }
+    if (skillSections.length >= 4) {
+      updateTextContent(skillSections[3].querySelector('h4'), content.languages.title);
+      const langContent = skillSections[3].querySelector('p');
+      if (langContent) {
+        langContent.innerHTML = `${content.languages.content.english}<br>${content.languages.content.russian}`;
       }
     }
-
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-      const titleEl = contactSection.querySelector('h2');
-      const introEl = contactSection.querySelector('p.pb-1');
-      const telegramButton = contactSection.querySelector('a[href*="telegram"]');
-      const emailButton = contactSection.querySelector('a[href*="mailto"]');
-      
-      if (titleEl) titleEl.textContent = content.contact.title;
-      if (introEl) introEl.textContent = content.contact.intro;
-      if (telegramButton) telegramButton.textContent = content.contact.telegram;
-      if (emailButton) emailButton.textContent = content.contact.email;
-    }
-
-    const footerText = document.querySelector('.footer .nav-item');
-    if (footerText) {
-      footerText.textContent = content.footer.copyright;
+    
+    // Раздел "Контакты"
+    updateTextContent('#contact h2', content.contact.title);
+    updateTextContent('#contact p.pb-1', content.contact.intro);
+    updateTextContent('a[href*="t.me"]', content.contact.telegram);
+    updateTextContent('a[href*="mailto"]', content.contact.email);
+    
+    // Футер
+    updateTextContent('.footer .nav-item', content.footer.copyright);
+    
+    console.log('Язык успешно применен:', lang);
+  }
+  
+  // Вспомогательная функция для обновления текстового содержимого элемента
+  function updateTextContent(selector, text) {
+    const element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (element && text) {
+      element.textContent = text;
     }
   }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  new LanguageSwitcher();
 });
