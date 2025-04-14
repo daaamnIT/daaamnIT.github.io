@@ -1,122 +1,206 @@
 const translations = {
-    ru: {
-      logo: {
-        name: 'Дубовицкий Алексей',
-        subtitle: 'HSE FCS EDS 2027'
-      },
-      nav: {
-        about: 'Вкратце обо мне',
-        experience: 'Мой опыт работы',
-        collaboration: 'Сотрудничество',
-        writeMe: 'Написать мне'
-      },
-      greeting: {
-        hello: 'Привет! Здесь вы прочитаете обо мне',
-        description: 'Я — студент Высшей Школы Экономики, ФКН/ФЭН ВШЭ,\nУчусь хорошо, мечтаю начать ходить на все лекции и осуществить свой квант грайнд.',
-        button: 'Написать мне'
-      },
-      about: {
-        title: 'Обо мне',
-        content: 'Студент-второкурсник программы "Экономика и Анализ данных" НИУ ВШЭ с богатым опытом разработки. Увлекаюсь программированием с младшей школы, уверенно владею Python и C++. Участник хакатона ML Alfa Campus Junior, где разработал модель кредитного скоринга для оценки платёжеспособности физических лиц. Имею практический опыт в различных направлениях разработки: от создания мобильных приложений на React Native и веб-сайтов на Django до разработки Telegram-ботов с использованием aiogram и telebot. Сочетаю глубокие технические знания с пониманием экономических процессов и анализа данных.'
-      },
-      experience: {
-        title: 'Мой опыт работы',
-        hse: {
-          name: 'НИУ «ВШЭ»',
-          current: 'Настоящее время',
-          positions: {
-            student: {
-              title: 'Студент',
-              period: 'Сентябрь 2023 – настоящее время',
-              description: 'Занимаюсь изучением математики, программирования, экономики, анализа данных, машинного обучения, статистики, теории вероятностей, линейной алгебры, пивопития, девушек и прочих столпов высшего образования.'
-            },
-            pupil1: {
-              title: 'Ученик',
-              period: 'Сентябрь 2019 – 2022',
-              description: 'Москвская школа программистов при НИУ ВШЭ'
-            },
-            pupil2: {
-              title: 'Ученик',
-              period: 'Сентябрь 2021 – 2023',
-              description: 'Лицей НИУ ВШЭ'
-            }
+  ru: {
+    logo: {
+      name: 'Дубовицкий Алексей',
+      subtitle: 'ВШЭ ФКН/ФЭН 2027'
+    },
+    nav: {
+      about: 'Обо мне',
+      experience: 'Опыт',
+      projects: 'Проекты',
+      skills: 'Навыки',
+      languages: 'Языки',
+      writeMe: 'Связаться'
+    },
+    greeting: {
+      hello: 'Привет! Добро пожаловать на мою страницу',
+      description: 'Я — студент 2 курса программы "Экономика и анализ данных" Высшей Школы Экономики,\nИзучаю прикладную математику, информатику и экономику.',
+      button: 'Связаться со мной'
+    },
+    about: {
+      title: 'Обо мне',
+      content: 'Студент-второкурсник программы "Экономика и анализ данных" НИУ ВШЭ. Изучаю прикладную математику, информатику и экономику. Участник хакатона Alfa Campus Junior ML, где разработал модель кредитного скоринга. Имею опыт работы с Python, C++, JavaScript и различными фреймворками для веб- и мобильной разработки.'
+    },
+    experience: {
+      title: 'Образование',
+      hse: {
+        name: 'НИУ «ВШЭ»',
+        current: 'Настоящее время',
+        positions: {
+          student: {
+            title: 'Экономика и анализ данных',
+            period: 'Сентябрь 2023 – настоящее время',
+            description: 'Программа двух дипломов: Прикладная математика и информатика, Экономика. 2 курс бакалавриата.'
+          },
+          pupil1: {
+            title: 'Московская школа программистов',
+            period: 'Сентябрь 2020 – Июнь 2023',
+            description: 'Программа дополнительного образования'
           }
         }
-      },
-      goals: {
-        title: 'Мои цели',
-        content: 'В ближайшее время хочу освоить все инструменты машинного обучения и анализа данных, чтобы стать крутым ML-инженером и стать успешным квантом!',
-        poem: 'Тренболон колю в очко\nЧтобы стать большим-большим качком\nВ дверной проём вхожу бочком\nЛюблю печеньки с молочком'
-      },
-      contact: {
-        title: 'Сотрудничество',
-        intro: 'Если интересно, что я могу для вас сделать, пишите:',
-        telegram: 'Написать в Telegram',
-        email: 'Написать на почту'
-      },
-      footer: {
-        copyright: 'Cделано с любовью и копайлотом в 2024 году.'
       }
     },
-    en: {
-      logo: {
-        name: 'Alexey Dubovitskiy',
-        subtitle: 'HSE FCS EDS 2027'
-      },
-      nav: {
-        about: 'About Me',
-        experience: 'Experience',
-        collaboration: 'Collaboration',
-        writeMe: 'Contact Me'
-      },
-      greeting: {
-        hello: 'Hi! Here you can read about me',
-        description: "I'm a student at the Higher School of Economics, Faculty of Computer Science/Faculty of Economic Sciences,\nStudying well, dreaming of attending all lectures and achieving my quant grind.",
-        button: 'Contact Me'
-      },
-      about: {
-        title: 'About Me',
-        content: 'Second-year student of the "Economics and Data Analysis" program at HSE with extensive development experience. Passionate about programming since elementary school, proficient in Python and C++. Participant of ML Alfa Campus Junior hackathon, where I developed a credit scoring model for assessing individual creditworthiness. I have practical experience in various development areas: from creating mobile applications with React Native and websites with Django to developing Telegram bots using aiogram and telebot. I combine deep technical knowledge with understanding of economic processes and data analysis.'
-      },
-      experience: {
-        title: 'My Experience',
-        hse: {
-          name: 'HSE University',
-          current: 'Present',
-          positions: {
-            student: {
-              title: 'Student',
-              period: 'September 2023 – Present',
-              description: 'Studying mathematics, programming, economics, data analysis, machine learning, statistics, probability theory, linear algebra, beer drinking, girls, and other pillars of higher education.'
-            },
-            pupil1: {
-              title: 'Student',
-              period: 'September 2019 – 2022',
-              description: 'Moscow School of Programming at HSE'
-            },
-            pupil2: {
-              title: 'Student',
-              period: 'September 2021 – 2023',
-              description: 'HSE Lyceum'
-            }
+    projects: {
+      title: 'Проекты',
+      items: [
+        {
+          name: 'Рекомендательная система для подбора фильмов',
+          period: '2025',
+          location: 'Москва',
+          subtitle: 'Content-based и Collaborative Filtering системы рекомендаций',
+          description: 'Разработка алгоритма для подбора фильмов группе пользователей. Использованные технологии: Python.'
+        },
+        {
+          name: 'Image Processor',
+          period: '2024',
+          location: 'Москва',
+          subtitle: 'Приложение для обработки изображений',
+          description: 'Создание программы для редактирования и обработки фотографий. Использованные технологии: C++.'
+        },
+        {
+          name: 'Разработка модели кредитного скоринга',
+          period: '2023',
+          location: 'Москва',
+          subtitle: 'Alfa Campus Junior ML трек',
+          description: 'Разработка и обучение модели для предсказания вероятности возврата кредита. Использованные технологии: Python, Pandas, NumPy, Scikit-learn, CatBoost.'
+        },
+        {
+          name: 'Мобильное приложение-агрегатор кофеен',
+          period: '2023',
+          location: 'Москва',
+          subtitle: 'Мобильная разработка',
+          description: 'Разработка приложения для поиска и выбора кофеен. Фронтенд: JavaScript, React Native; Бэкенд: Python, Django.'
+        }
+      ]
+    },
+    skills: {
+      title: 'Технические навыки',
+      content: {
+        programmingLanguages: 'Языки программирования: Python, C++, JavaScript',
+        libraries: 'Библиотеки & Фреймворки: Pandas, NumPy, Scikit-learn, CatBoost, React, Django',
+        tools: 'Инструменты: Linux, Git'
+      }
+    },
+    languages: {
+      title: 'Языки',
+      content: {
+        english: 'Английский: C1 (Продвинутый)',
+        russian: 'Русский: Родной'
+      }
+    },
+    contact: {
+      title: 'Контакты',
+      intro: 'Если у вас есть предложения по сотрудничеству, свяжитесь со мной:',
+      telegram: 'Написать в Telegram',
+      email: 'Написать на почту',
+      phone: '+7 (916) 443-42-25',
+      github: 'github.com/daaamnIT'
+    },
+    footer: {
+      copyright: 'Сделано в 2024 году.'
+    }
+  },
+  en: {
+    logo: {
+      name: 'Alexey Dubovitskiy',
+      subtitle: 'HSE FCS/FES 2027'
+    },
+    nav: {
+      about: 'About Me',
+      experience: 'Education',
+      projects: 'Projects',
+      skills: 'Skills',
+      languages: 'Languages',
+      writeMe: 'Contact'
+    },
+    greeting: {
+      hello: 'Hi! Welcome to my page',
+      description: "I'm a 2nd year student of the 'Economics and Data Analysis' program at Higher School of Economics,\nStudying applied mathematics, computer science, and economics.",
+      button: 'Contact Me'
+    },
+    about: {
+      title: 'About Me',
+      content: 'Second-year student of the "Economics and Data Analysis" program at HSE University. Studying applied mathematics, computer science, and economics. Participant of Alfa Campus Junior ML hackathon, where I developed a credit scoring model. Experienced with Python, C++, JavaScript, and various frameworks for web and mobile development.'
+    },
+    experience: {
+      title: 'Education',
+      hse: {
+        name: 'HSE University',
+        current: 'Present',
+        positions: {
+          student: {
+            title: 'Economics and Data Analysis',
+            period: 'September 2023 – Present',
+            description: 'Double degree program: Applied Mathematics and Computer Science, Economics. 2nd year undergraduate student.'
+          },
+          pupil1: {
+            title: 'Moscow School of Programmers',
+            period: 'September 2020 – June 2023',
+            description: 'Additional Education Program'
           }
         }
-      },
-      goals: {
-        title: 'My Goals',
-        content: 'In the near future, I want to master all machine learning and data analysis tools to become a cool ML engineer and a successful quant!',
-        poem: 'Trenbolone I inject with care\nTo become a massive bear\nThrough doorways sideways I must fare\nCookies and milk - my favorite pair'
-      },
-      contact: {
-        title: 'Collaboration',
-        intro: "If you're interested in what I can do for you, write to me:",
-        telegram: 'Message on Telegram',
-        email: 'Send Email'
-      },
-      footer: {
-        copyright: 'Made with love and copilot in 2024.'
       }
+    },
+    projects: {
+      title: 'Projects',
+      items: [
+        {
+          name: 'Movie Recommendation System',
+          period: '2025',
+          location: 'Moscow, Russia',
+          subtitle: 'Content-based and Collaborative Filtering recommendation systems',
+          description: 'Developed an algorithm for recommending movies to groups of users. Technologies used: Python.'
+        },
+        {
+          name: 'Image Processor',
+          period: '2024',
+          location: 'Moscow, Russia',
+          subtitle: 'Image processing application',
+          description: 'Created a program for editing and processing photos. Technologies used: C++.'
+        },
+        {
+          name: 'Credit Scoring Model Development',
+          period: '2023',
+          location: 'Moscow, Russia',
+          subtitle: 'Alfa Campus Junior ML track',
+          description: 'Developed and trained a model to predict the probability of loan repayment. Technologies used: Python, Pandas, NumPy, Scikit-learn, CatBoost.'
+        },
+        {
+          name: 'Coffee Shop Aggregator Mobile App',
+          period: '2023',
+          location: 'Moscow, Russia',
+          subtitle: 'Mobile Development',
+          description: 'Developed an application for searching and selecting coffee shops. Frontend: JavaScript, React Native; Backend: Python, Django.'
+        }
+      ]
+    },
+    skills: {
+      title: 'Technical Skills',
+      content: {
+        programmingLanguages: 'Programming Languages: Python, C++, JavaScript',
+        libraries: 'Libraries & Frameworks: Pandas, NumPy, Scikit-learn, CatBoost, React, Django',
+        tools: 'Tools: Linux, Git'
+      }
+    },
+    languages: {
+      title: 'Languages',
+      content: {
+        english: 'English: C1 (Advanced)',
+        russian: 'Russian: Native'
+      }
+    },
+    contact: {
+      title: 'Contact',
+      intro: 'If you have any collaboration opportunities, feel free to reach out:',
+      telegram: 'Message on Telegram',
+      email: 'Send Email',
+      phone: '+7 (916) 443-42-25',
+      github: 'github.com/daaamnIT'
+    },
+    footer: {
+      copyright: 'Made in 2024.'
     }
-  };
-  
-  export default translations;
+  }
+};
+
+export default translations;
